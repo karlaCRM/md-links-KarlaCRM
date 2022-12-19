@@ -1,6 +1,29 @@
 {
-  "name": "md-links",
-  "version": "0.1.0",
+  "name": "md-links-krm",
+  "version": "1.0.0",
+  "description": " no olvidar llenarlo después",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karlaCRM/md-links-KarlaCRM.git"
+  },
+  "keywords": [
+    "markdown",
+    "markdown_links",
+    "links"
+  ],
+  "author": "karlaCRM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karlaCRM/md-links-KarlaCRM/issues"
+  },
+  "homepage": "https://github.com/karlaCRM/md-links-KarlaCRM#readme",
   "engines": {
     "node": ">=16.x"
   },
@@ -8,5 +31,8 @@
     "createdAt": "2022-11-16T21:49:06.371Z",
     "version": "5.4.0",
     "commit": "14aeca030be012fc987dcb1c604bbbcb0fdd325e"
+  },
+  "devDependencies": {
+    "jest": "^29.3.1"
   }
 }
