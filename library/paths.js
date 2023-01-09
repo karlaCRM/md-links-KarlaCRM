@@ -2,24 +2,23 @@ const fs = require("fs");
 const path = require("path");
 
 /* funcion para convertir ruta relativa a absoluta */
+
+const checkIfPathIsAbsolute = (route) => {
+  return path.isAbsolute(route)
+}
+
 const pathconvertToAbs = (route) => {
-  if (path.isAbsolute(route) === true) {
-     return route;
-  } else {
     const pathAbs = path.resolve(route);
     return pathAbs;
-  }
 };
+
+const routeExist = (route) => fs.existsSync(route)
 
 // path.extname(routeAbsolute).includes('.md')
 
 /* variable para prueba de funciones */
-let pathI = pathconvertToAbs(`./test/prueba/nuevo.md`);
-
 /* funcion para checar si es archivo */
 const isAFile = (routeAbsolute) => fs.statSync(routeAbsolute).isFile();
-
-console.log(isAFile(pathI))
 
 /* funcion para checar si es file o directorio y recorrer directorios, es recursiva */
 const saveFilesInArray = (routeAbsolute) => {
@@ -43,6 +42,5 @@ const filterTheMdLinks = (routeAbsolute) => {
   return saveFilesInArray(routeAbsolute).filter((file => path.extname(file) === '.md'));
 };
 
-console.log(filterTheMdLinks(pathI))
 
-module.exports = { pathconvertToAbs, saveFilesInArray, filterTheMdLinks, isAFile  };
+module.exports = { checkIfPathIsAbsolute, pathconvertToAbs, routeExist, saveFilesInArray, filterTheMdLinks, isAFile  };

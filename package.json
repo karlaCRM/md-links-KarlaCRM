@@ -34,6 +34,8 @@
     "commit": "14aeca030be012fc987dcb1c604bbbcb0fdd325e"
   },
   "dependencies": {
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "jsdom": "^21.0.0",
+    "marked": "^4.2.5"
   }
 }
