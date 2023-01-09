@@ -18,7 +18,13 @@ const mdLinks = (path) => new Promise((resolve,reject) => {
         const filterArray = filterTheMdLinks(pathAbsolute)
         filterArray.forEach((file) => {
           readFiles(file)
-          .then(link => resolve(console.log(link))
+          .then(link => {
+            if(link.length >= 1){
+              
+             arr.push(link)
+             console.log(arr)
+            }
+          }
         )
           
         })
@@ -28,4 +34,9 @@ const mdLinks = (path) => new Promise((resolve,reject) => {
       }
     })
 
-console.log(mdLinks(pathI))
+    mdLinks(pathI)
+    .then((response) => {
+      console.log(response);
+    
+    })
+  

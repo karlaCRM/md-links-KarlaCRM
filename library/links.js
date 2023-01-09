@@ -10,14 +10,13 @@ const readFiles = (file) => {
         reject(err);
       }
       if(data){
-      resolve(console.log(filterLinks(data, file)))
+      resolve(filterLinks(data, file))
       } 
     });
   })
 
 };
 
-console.log(readFiles(pathI))
 // const filterLinks = (file) => new Promise((resolve, reject) => {
 //     let arrLinks = []
 //     const openFile = fs.readFileSync(file, 'UTF8');
