@@ -1,12 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 
-/* funcion para convertir ruta relativa a absoluta */
-
+/* funcion para checar si es absoluta o relativa */
 const checkIfPathIsAbsolute = (route) => {
   return path.isAbsolute(route)
 }
 
+/* funcion para convertir ruta relativa a absoluta */
 const pathconvertToAbs = (route) => {
     const pathAbs = path.resolve(route);
     return pathAbs;
@@ -14,13 +14,15 @@ const pathconvertToAbs = (route) => {
 
 const routeExist = (route) => fs.existsSync(route)
 
-// path.extname(routeAbsolute).includes('.md')
 
-/* variable para prueba de funciones */
 /* funcion para checar si es archivo */
 const isAFile = (routeAbsolute) => fs.statSync(routeAbsolute).isFile();
 
-/* funcion para checar si es file o directorio y recorrer directorios, es recursiva */
+/**
+  * @function {checa si es file o directory y en caso de directory lo recorre y guarda rutas en array}
+  * @param {routeAbsolute}
+  * @returns {array de rutas guardadas de todos los archivos que se encuentran}
+  */
 const saveFilesInArray = (routeAbsolute) => {
   let arrayOfFilesMd = [];
   if (
@@ -38,6 +40,11 @@ const saveFilesInArray = (routeAbsolute) => {
   return arrayOfFilesMd;
 };
 
+/**
+  * @function {filtra los archivos que son md usando .extname y retorna un array de las rutas de estos archivos}
+  * @param {routeAbsolute}
+  * @returns {un array filtrado de rutas de archivos .md}
+  */
 const filterTheMdLinks = (routeAbsolute) => {
   return saveFilesInArray(routeAbsolute).filter((file => path.extname(file) === '.md'));
 };

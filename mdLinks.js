@@ -24,13 +24,11 @@ const mdLinks = (path) => new Promise((resolve,reject) => {
     //aqui estoy metiendo un promise.All para resolver todas las promesas (viene una por cada for each que se hace al array de links)
     const promises = []
     filterArray.forEach(file => promises.push(readFiles(file)) )
-    
   Promise.allSettled(promises).then(data =>{
 let arr = []
     data.forEach((el) => arr.push((el.value).flat()))
    resolve(arr.flat())
   })
- 
     }
     else{
       reject(log("no existe la ruta"))
