@@ -1,6 +1,5 @@
 // const fs = require("fs");
 const { marked } = require("marked");
-const {filterTheMdLinks } = require('./paths');
 const fs = require('node:fs/promises');
 const {log} = console;
 //usamos  promesas de node en vez de crearla 
@@ -17,10 +16,10 @@ const readFileAndSearchLinks = (arrOfMd) => {
   const promesas = arrOfMd.map(file => fs.readFile(file, { encoding: 'utf8' })
     .then((data) =>{
       // usamos then para a la data que nos esta devolviendo (es de cada archivo leido) se le aplica la funcion de filter links
-      return filterLinksMarked(data,file)
+      return filterLinksMarked(data,file);
     })
     .catch(() =>{
-      log("problema con el file", file)
+      log('problema con el archivo', file);
     }));
 
     return Promise.all(promesas)
@@ -29,11 +28,6 @@ const readFileAndSearchLinks = (arrOfMd) => {
     })
 }
 
-readFileAndSearchLinks(filterTheMdLinks(pathI))
-.then(response =>{
-  log(response)
-})
-
 /**
   * @function {funcion que extrae los links usando marked}
   * @param {it renders the markdown in html format}
@@ -41,7 +35,7 @@ readFileAndSearchLinks(filterTheMdLinks(pathI))
   */
 const filterLinksMarked = (data, file) => {
   let arrLinks = [];
-  const route = file.replace(/\\/g, "/")
+  const route = file.replace(/\\/g, "/");
 
   const renderer = new marked.Renderer();
   renderer.link = (href, _, text) => {
@@ -51,7 +45,7 @@ const filterLinksMarked = (data, file) => {
         file: route,
     }
     if(renderer.link.length !== 0){
-      arrLinks.push(obj)
+      arrLinks.push(obj);
     }
     
   };
