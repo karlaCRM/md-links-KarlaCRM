@@ -1,4 +1,3 @@
-
 const {
   checkIfPathIsAbsolute,
   pathconvertToAbs,
@@ -6,7 +5,10 @@ const {
   filterTheMdLinks,
 } = require("./library/paths");
 
+
 const { readFileAndSearchLinks } = require("./library/links");
+
+const { validateLinks } = require("./library/validate");
 
 let pathI = `${process.cwd()}\\test\\prueba`;
 
@@ -16,29 +18,30 @@ const mdLinks = (path, option) =>
     if (routeExist(path)) {
       const filterArray = filterTheMdLinks(pathAbsolute);
       if (filterArray.length === 0) {
-        reject(console.log('NO HAY NINGUN ARCHIVO MARKDOWN'));
+        reject(new Error('NO HAY NINGUN ARCHIVO MARKDOWN'));
       }
       readFileAndSearchLinks(filterArray).then((response) =>{
-        if(response.length === 0){
-          reject(console.log('NO HAY NINGUN LINK'));
-        }
-    console.log('Estos son los links')
+      if(option.validate === true){
+      validateLinks(response).then((arrOfLinks) =>{
+        resolve(arrOfLinks)
+      })
+    }
     resolve(response)
+
       })
 
     }
     else{
-      reject(console.log('no existe la ruta especificada'))
-    
+      reject(new Error('the route does not exist'))
     }
-  });
 
-mdLinks(pathI).then((response) => {
-  console.log(response);
-});
+
+  });
 
 
 /**npm install node-fetch@v2
 npm install node-fetch@v2
 const fetch = require('node-fetch');
  */
+
+module.exports = { mdLinks };
