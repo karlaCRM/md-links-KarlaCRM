@@ -18,7 +18,7 @@ const mdLinks = (path, option) =>
     if (routeExist(path)) {
       const filterArray = filterTheMdLinks(pathAbsolute);
       if (filterArray.length === 0) {
-        reject(new Error('NO HAY NINGUN ARCHIVO MARKDOWN'));
+        reject(new Error('THERE ARE NO ".MD" FILES, TRY ENTERING ANOTHER PATH MARKDOWN'));
       }
       readFileAndSearchLinks(filterArray).then((response) =>{
       if(option.validate === true){
@@ -29,14 +29,11 @@ const mdLinks = (path, option) =>
     if(option.validate === false){
       resolve(response)
     }
-    
-    
-
       })
 
     }
     else{
-      reject(new Error('the route does not exist'))
+      reject(new Error('THE ROUTE DOES NOT EXIST, TRY WITH ANOTHER PATH'))
     }
 
 

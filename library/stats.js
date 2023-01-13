@@ -15,11 +15,11 @@ const statLinks = (arrOfLinks) => {
 
 const statAndValidate = (arrOfLinks) => {
     const uniqueLinks = new Set(arrOfLinks.map((link) => link.href)).size;
-    const brokenLinks = arrOfLinks.filter((link) => link.status === 'fail')
+    const brokenLinks = arrOfLinks.filter((link) => link.isOk === 'fail')
     return {
         Total: arrOfLinks.length,
         Unique: uniqueLinks,
-        Broken: brokenLinks
+        Broken: brokenLinks.length
     }
 }
 
