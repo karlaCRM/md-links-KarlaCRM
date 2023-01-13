@@ -26,7 +26,11 @@ const mdLinks = (path, option) =>
         resolve(arrOfLinks)
       })
     }
-    resolve(response)
+    if(option.validate === false){
+      resolve(response)
+    }
+    
+    
 
       })
 

@@ -34,7 +34,8 @@ log("\n");
       .catch((err) => log(err))
 
 }
-  mdLinks(route, {validate:true})
+  if(!validate){
+    mdLinks(route, {validate:false})
   .then((arrayOfLinks) => {
     if(arrayOfLinks.length <= 0){
      log(new Error('This file has no links to show'));
@@ -47,6 +48,7 @@ log("\n");
       })
       })
       .catch((err) => log(err))
+  }
 
 }
 
