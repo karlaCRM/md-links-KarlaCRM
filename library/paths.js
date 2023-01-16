@@ -1,27 +1,32 @@
 const fs = require("fs");
 const path = require("path");
+const chalk = require('chalk')
+
+/*funcion para dar color*/
+const colorOfText = (message, color) => chalk.keyword(color)(message);
+
+/* funcion para checar si es absoluta o relativa */
+const checkIfPathIsAbsolute = (route) => {
+  return path.isAbsolute(route)
+}
 
 /* funcion para convertir ruta relativa a absoluta */
 const pathconvertToAbs = (route) => {
-  if (path.isAbsolute(route) === true) {
-     return route;
-  } else {
     const pathAbs = path.resolve(route);
     return pathAbs;
-  }
 };
 
-// path.extname(routeAbsolute).includes('.md')
+const routeExist = (route) => fs.existsSync(route)
 
-/* variable para prueba de funciones */
-let pathI = pathconvertToAbs(`./test/prueba/nuevo.md`);
 
 /* funcion para checar si es archivo */
 const isAFile = (routeAbsolute) => fs.statSync(routeAbsolute).isFile();
 
-console.log(isAFile(pathI))
-
-/* funcion para checar si es file o directorio y recorrer directorios, es recursiva */
+/**
+  * @function saveFilesInArray
+  * @param routeAbsolute
+  * @returns array de rutas guardadas de todos los archivos que se encuentran
+  */
 const saveFilesInArray = (routeAbsolute) => {
   let arrayOfFilesMd = [];
   if (
@@ -39,10 +44,14 @@ const saveFilesInArray = (routeAbsolute) => {
   return arrayOfFilesMd;
 };
 
+/**
+  * @function filterTheMdLinks
+  * @param routeAbsolute
+  * @returns filtra los archivos que son md usando .extname y retorna un array de las rutas de estos archivos
+  */
 const filterTheMdLinks = (routeAbsolute) => {
   return saveFilesInArray(routeAbsolute).filter((file => path.extname(file) === '.md'));
 };
 
-console.log(filterTheMdLinks(pathI))
 
-module.exports = { pathconvertToAbs, saveFilesInArray, filterTheMdLinks, isAFile  };
+module.exports = { colorOfText, checkIfPathIsAbsolute, pathconvertToAbs, routeExist, saveFilesInArray, filterTheMdLinks, isAFile  };
