@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest --coverage ",
+    "testing": "jest --watch",
     "build": "babel src -d lib"
   },
   "repository": {
@@ -43,5 +44,8 @@
     "jsdom": "^21.0.0",
     "marked": "^4.2.5",
     "node-fetch": "^2.6.7"
+  },
+  "devDependencies": {
+    "jest": "^29.3.1"
   }
 }
