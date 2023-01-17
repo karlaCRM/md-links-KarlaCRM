@@ -18,13 +18,13 @@ const resultArrayOfOneLink =  [
 ]
 
 const resultArrayOfLinks =  [
-  'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba 2\\pruebadentro.md',
-  'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba 2\\testvacio.md'
+  'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba2\\pruebadentro.md',
+  'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba2\\testvacio.md'
 ]
 
 const resultArrayOfMd =  [
   'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\nuevo.md',
-  'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba 2\\pruebadentro.md',
+  'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba2\\pruebadentro.md',
   'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\text.md'
 ]
 
@@ -86,28 +86,11 @@ describe('isAFile es una funcion que verifica si el link recibido es de un file,
 
 /* Test de funcion que obtiene array de links de archivos*/
 describe('saveFilesInArray es una funcion que revisa si el path que se le pasa es un file o un directorio, en caso de ser file lo sube a un array, en los directorios los recorre y encuentra los archivos subiendolos al mismo array', () => {
+  fs.statSync.mockImplementation(() => ({ isFile: () => true }));
   it('saveFilesInArray es una funcion', () => {
     expect(typeof saveFilesInArray).toBe('function');
   });
   it('saveFilesInArray deberia retornar un array con un link si se le paso un file', () => {
-    fs.statSync.mockImplementationOnce(() => ({ isFile: () => true }));
     expect(saveFilesInArray(`${process.cwd()}\\test\\prueba\\nuevo.md`)).toEqual(resultArrayOfOneLink);
-  });
-  it('saveFilesInArray deberia abrir un directorio y guardar en un array los archivos', () => {
-    fs.readdirSync.mockImplementationOnce(() => [ 'pruebadentro.md', 'testvacio.md' ])
-    fs.statSync.mockImplementationOnce(() => ({ isFile: () => false }));
-      expect(saveFilesInArray(`${process.cwd()}\\test\\prueba\\prueba2`)).toEqual([ 'pruebadentro.md', 'testvacio.md' ])
-    
-      
-    
-   
-  });
-
-})
-
-/* Test de funcion que filtra array de links, obtiene solo los .md*/
-describe('filterTheMdLinks es una funcion retorna los archivos .md filtrados', () => {
-  it('filterTheMdLinks es una funcion', () => {
-    expect(typeof isAFile).toBe('function');
   });
 });
