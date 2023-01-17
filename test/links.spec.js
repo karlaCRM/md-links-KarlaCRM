@@ -1,15 +1,14 @@
-const fs = require('fs');
-const path = require('path');
+
 const { checkIfPathIsAbsolute,
   pathconvertToAbs,
   saveFilesInArray,
   filterTheMdLinks,
   isAFile,
   routeExist} = require('../library/paths');
+  const fs = require('fs');
 
-  jest.mock('fs');
-jest.mock('path')
-
+  const { readFileAndSearchLinks,
+    filterLinksMarked} = require('../library/links');
 
 /* test de absolute y relative*/
 
@@ -17,14 +16,18 @@ const resultArrayOfOneLink =  [
   'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\nuevo.md',
 ]
 
-const resultArrayOfLinks =  [
-  'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba 2\\pruebadentro.md',
-  'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba 2\\testvacio.md'
-]
+const resultArrayOfLinks = [
+  "C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\archivoparaTest.js",
+  "C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\nuevo.md",
+  "C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba2\\pruebadentro.md",
+  "C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba2\\testvacio.md",
+  "C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\text.md",
+];
 
 const resultArrayOfMd =  [
   'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\nuevo.md',
-  'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba 2\\pruebadentro.md',
+  'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba2\\pruebadentro.md',
+  "C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba2\\testvacio.md",
   'C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\text.md'
 ]
 
@@ -37,12 +40,7 @@ describe('checkIfPathIsAbsolute es una funcion que verifica si la ruta recibida 
   it('checkIfPathIsAbsolute es una funcion', () => {
     expect(typeof checkIfPathIsAbsolute).toBe('function');
   });
-  it('checkIfPathIsAbsolute llama a path.isAbsolute', () => {
-    checkIfPathIsAbsolute(rutaAbsoluta);
-    expect(path.isAbsolute).toHaveBeenCalled();
-  });
   it('checkIfPathIsAbsolute retorna true', () => {
-    path.isAbsolute.mockImplementationOnce(() => ( true ));
     expect(checkIfPathIsAbsolute(rutaAbsoluta)).toBe(true);
   });
 });
@@ -54,21 +52,15 @@ describe('pathconvertToAbs es una funcion que convierte una ruta a absoluta', ()
   });
 
   it('devuelve ruta relativa convertida a absoluta', () => {
-    path.resolve.mockImplementationOnce(() => `${__dirname}\\prueba\\nuevo.md`);
-      expect(pathconvertToAbs(rutaRelativa)).toEqual(`${__dirname}\\prueba\\nuevo.md`)
+      expect(pathconvertToAbs(rutaRelativa)).toEqual('C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\nuevo.md')
     
   });
 });
 
 /* Test de funcion checa que la ruta exista */
 describe('routeExist es una funcion que convierte una ruta a absoluta', () => {
-  it('routeExist llama a fs.existsSync', () => {
-    routeExist(rutaAbsoluta);
-    expect(fs.existsSync).toHaveBeenCalled();
-  });
-
   it('devuelve un booleano, true si la ruta existe', () => {
-    fs.existsSync.mockImplementationOnce(() =>  true);
+    routeExist(rutaAbsoluta);
       expect(routeExist(rutaAbsoluta)).toBe(true)
   });
 });
@@ -79,7 +71,6 @@ describe('isAFile es una funcion que verifica si el link recibido es de un file,
     expect(typeof isAFile).toBe('function');
   });
   it('isAFile retorna true al recibir un archivo', () => {
-    fs.statSync.mockImplementationOnce(() => ({ isFile: () => true }));
     expect(isAFile('C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\links.spec.js')).toBe(true);
   });
 });
@@ -90,17 +81,10 @@ describe('saveFilesInArray es una funcion que revisa si el path que se le pasa e
     expect(typeof saveFilesInArray).toBe('function');
   });
   it('saveFilesInArray deberia retornar un array con un link si se le paso un file', () => {
-    fs.statSync.mockImplementationOnce(() => ({ isFile: () => true }));
     expect(saveFilesInArray(`${process.cwd()}\\test\\prueba\\nuevo.md`)).toEqual(resultArrayOfOneLink);
   });
   it('saveFilesInArray deberia abrir un directorio y guardar en un array los archivos', () => {
-    fs.readdirSync.mockImplementationOnce(() => [ 'pruebadentro.md', 'testvacio.md' ])
-    fs.statSync.mockImplementationOnce(() => ({ isFile: () => false }));
-      expect(saveFilesInArray(`${process.cwd()}\\test\\prueba\\prueba2`)).toEqual([ 'pruebadentro.md', 'testvacio.md' ])
-    
-      
-    
-   
+      expect(saveFilesInArray(`${process.cwd()}\\test\\prueba`)).toEqual(resultArrayOfLinks);
   });
 
 })
@@ -110,4 +94,25 @@ describe('filterTheMdLinks es una funcion retorna los archivos .md filtrados', (
   it('filterTheMdLinks es una funcion', () => {
     expect(typeof isAFile).toBe('function');
   });
+  it('filterTheMdLinks retorna un array de archivos .md filtrados', () => {
+    expect(filterTheMdLinks(rutaAbsoluta)).toEqual(resultArrayOfMd)
+
 });
+});
+
+/* Test de funcion que filtra array de links, obtiene solo los .md*/
+describe('readFileAndSearchLinks es una funcion que lee los archivos y encuentra los links', () => {
+  it('readFileAndSearchLinks retorna una promesa', () => {
+    expect(readFileAndSearchLinks(resultArrayOfMd)).toBeInstanceOf(Promise);
+  });
+  it('Debería retornar una promesa resuelta', async() => {
+    jest.mock('fs');
+    fs.readFile.mockImplementation(() => 'Aqui no hay ningún link');
+    await expect(readFile("C:\\Users\\HP\\OneDrive\\Documentos\\laboratoria bootcamp\\md-links-KarlaCRM\\test\\prueba\\prueba2\\pruebadentro.md")).resolves.toEqual('Aqui no hay ningún link')
+  });
+ 
+});
+
+
+
+
