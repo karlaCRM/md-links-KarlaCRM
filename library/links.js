@@ -18,8 +18,9 @@ const readFileAndSearchLinks = (arrOfMd) => {
       // usamos then para a la data que nos esta devolviendo (es de cada archivo leido) se le aplica la funcion de filter links
       return filterLinksMarked(data,file);
     })
-    .catch(() =>{
-      log('problema con el archivo', file);
+    .catch((e) =>{
+      log(e)
+     return e
     }));
 
     return Promise.all(promesas)
@@ -44,10 +45,7 @@ const filterLinksMarked = (data, file) => {
         text: text.slice(0,50),
         file: route,
     }
-    if(renderer.link.length !== 0){
       arrLinks.push(obj);
-    }
-    
   };
   marked(data, {renderer})
  return arrLinks
@@ -102,4 +100,4 @@ console.log(filterLinks(pathI)) */
 
     
 
-module.exports = { readFileAndSearchLinks };
+module.exports = { readFileAndSearchLinks, filterLinksMarked };

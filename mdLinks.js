@@ -1,10 +1,10 @@
+const paths = require("path");
+const fs = require("fs");
+
 const {
-  checkIfPathIsAbsolute,
   pathconvertToAbs,
-  routeExist,
   filterTheMdLinks,
 } = require("./library/paths");
-
 
 const { readFileAndSearchLinks } = require("./library/links");
 
@@ -14,8 +14,8 @@ let pathI = `${process.cwd()}\\test\\prueba`;
 
 const mdLinks = (path, option) =>
   new Promise((resolve, reject) => {
-    const pathAbsolute = checkIfPathIsAbsolute(path)? path: pathconvertToAbs(path);
-    if (routeExist(path)) {
+    const pathAbsolute = paths.isAbsolute(path)? path: pathconvertToAbs(path);
+    if (fs.existsSync(path)) {
       const filterArray = filterTheMdLinks(pathAbsolute);
       if (filterArray.length === 0) {
         reject(new Error('THERE ARE NO ".MD" FILES, TRY ENTERING ANOTHER PATH MARKDOWN'));

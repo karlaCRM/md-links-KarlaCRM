@@ -1,5 +1,4 @@
 const fetch = require('node-fetch')
-const { log } = console;
 
 /**
  * @function  validateLinks
@@ -14,7 +13,7 @@ const validateLinks = (arrOfLinks) => {
                 text: link.text,
                 file: link.file,
                 status: response.status,
-                isOk: response.status < 400?'ok':'fail',
+                isOk: response.status < 400 ? 'ok':'fail',
             }
         })
   })
