@@ -18,7 +18,7 @@ const mdLinks = (path, option) =>
     if (fs.existsSync(path)) {
       const filterArray = filterTheMdLinks(pathAbsolute);
       if (filterArray.length === 0) {
-        reject(new Error('THERE ARE NO ".MD" FILES, TRY ENTERING ANOTHER PATH MARKDOWN'));
+        reject('THERE ARE NO ".MD" FILES, TRY ENTERING ANOTHER PATH MARKDOWN');
       }
       readFileAndSearchLinks(filterArray).then((response) =>{
       if(option.validate === true){
@@ -33,7 +33,7 @@ const mdLinks = (path, option) =>
 
     }
     else{
-      reject(new Error('THE ROUTE DOES NOT EXIST, TRY WITH ANOTHER PATH'))
+      reject('THE ROUTE DOES NOT EXIST, TRY WITH ANOTHER PATH')
     }
 
 
