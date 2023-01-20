@@ -6,9 +6,6 @@ const chalk = require('chalk')
 const colorOfText = (message, color) => chalk.keyword(color)(message);
 
 /* funcion para checar si es absoluta o relativa */
-const checkIfPathIsAbsolute = (route) => {
-  return path.isAbsolute(route)
-}
 
 /* funcion para convertir ruta relativa a absoluta */
 const pathconvertToAbs = (route) => {
@@ -16,11 +13,9 @@ const pathconvertToAbs = (route) => {
     return pathAbs;
 };
 
-const routeExist = (route) => fs.existsSync(route)
-
 
 /* funcion para checar si es archivo */
-const isAFile = (routeAbsolute) => fs.statSync(routeAbsolute).isFile();
+const isFile = (routeAbsolute) => fs.statSync(routeAbsolute).isFile();
 
 /**
   * @function saveFilesInArray
@@ -30,7 +25,7 @@ const isAFile = (routeAbsolute) => fs.statSync(routeAbsolute).isFile();
 const saveFilesInArray = (routeAbsolute) => {
   let arrayOfFilesMd = [];
   if (
-    isAFile(routeAbsolute))
+    isFile(routeAbsolute))
     {
     arrayOfFilesMd.push(routeAbsolute);
   } else {
@@ -54,4 +49,4 @@ const filterTheMdLinks = (routeAbsolute) => {
 };
 
 
-module.exports = { colorOfText, checkIfPathIsAbsolute, pathconvertToAbs, routeExist, saveFilesInArray, filterTheMdLinks, isAFile  };
+module.exports = { colorOfText, pathconvertToAbs, saveFilesInArray, filterTheMdLinks, isFile  };
