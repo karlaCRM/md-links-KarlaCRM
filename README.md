@@ -1,22 +1,9 @@
+[intro](https://user-images.githubusercontent.com/114018277/213886795-204b62e1-a7cf-42c3-92d1-f007f8b6f161.png)
 # Markdown Links
-
-## Índice
-
-* [1. Preámbulo](#1-preámbulo)
-* [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones generales](#4-consideraciones-generales)
-* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
-* [6. Entregables](#6-entregables)
-* [7. Hacker edition](#7-hacker-edition)
-* [8. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)
-* [9. Achicando el problema](#9-achicando-el-problema)
-* [10. Para considerar Project Feedback](#10-para-considerar-project-feedback)
-
 
 ***
 
-## 1. Preámbulo
+## 1. INTRO
 
 [Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado
 ligero muy popular entre developers. Es usado en muchísimas plataformas que
@@ -28,14 +15,12 @@ Estos archivos `Markdown` normalmente contienen _links_ (vínculos/ligas) que
 muchas veces están rotos o ya no son válidos y eso perjudica mucho el valor de
 la información que se quiere compartir.
 
-Dentro de una comunidad de código abierto, nos han propuesto crear una
-herramienta usando [Node.js](https://nodejs.org/), que lea y analice archivos
-en formato `Markdown`, para verificar los links que contengan y reportar
-algunas estadísticas.
+Se nos planteo el reto de realizar una herramienta (mediante el uso de NODE.JS) que pudiera identificar y leer archivos .md para extraer los links que se encuentran e ellos, a su vez fuera capaz de validarlos y obtener algunas estadísticas como: link rotos, cantidad de links unicos, total de links en el archivo, etc. 
 
-![img](assets/intro.png)
+md-Links no solo es capaz de leer archivos, también si lo deseas puedes pasarle la ruta a una carpeta y este se encargara de localizar los archivos .md que existan dentro y leerlos para extraer los links. 
 
-## 2. Resumen del proyecto
+
+## 2. ¿CÓMO INSTALARLO?
 
 En este proyecto crearás una herramienta de línea de comando (CLI) así como tu
 propia librería (o biblioteca - library) en JavaScript.
