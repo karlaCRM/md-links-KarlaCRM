@@ -16,7 +16,7 @@ const validateLinks = (arrOfLinks) => {
                 isOk: response.status < 400 ? 'true':'false',
             }
         })
-        .catch(() => console.log('error, cant validate a link'))
+        .catch((err) => err)
   })
   return Promise.all(arrOfValidateLinks);
     };

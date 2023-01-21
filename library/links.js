@@ -4,8 +4,6 @@ const fs = require('node:fs/promises');
 const {log} = console;
 //usamos  promesas de node en vez de crearla 
 
-let pathI = `${process.cwd()}\\test\\prueba`;
-
 /**
   * @function {lee los archivos md y retorna un array de objetos}
   * @param {un array de objetos con href, ruta y texto}

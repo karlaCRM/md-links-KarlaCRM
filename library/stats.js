@@ -15,7 +15,7 @@ const statLinks = (arrOfLinks) => {
 
 const statAndValidate = (arrOfLinks) => {
     const uniqueLinks = new Set(arrOfLinks.map((link) => link.href)).size;
-    const brokenLinks = arrOfLinks.filter((link) => link.isOk === 'fail')
+    const brokenLinks = arrOfLinks.filter((link) => link.isOk === 'false')
     return {
         Total: arrOfLinks.length,
         Unique: uniqueLinks,
