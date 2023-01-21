@@ -25,7 +25,7 @@ const arrayLinkValidadoStats = [
     text: "tu castigo",
     file: `${process.cwd()}/test/prueba/nuevo.md`.replace(/\\/g, "/"),
     status: "200",
-    isOk: "ok",
+    isOk: "true",
   },
 ];
 
@@ -43,7 +43,7 @@ describe("validateLinks recibe un array de archivos md, los lee y retorna una pr
           text: "tu castigo",
           file: `${process.cwd()}/test/prueba/nuevo.md`.replace(/\\/g, "/"),
           status: 200,
-          isOk: "ok",
+          isOk: "true",
         },
       ]);
     });
@@ -61,11 +61,12 @@ describe("validateLinks recibe un array de archivos md, los lee y retorna una pr
           text: "tu castigo",
           file: `${process.cwd()}/test/prueba/nuevo.md`.replace(/\\/g, "/"),
           status: 400,
-          isOk: "fail",
+          isOk: "false",
         },
       ]);
     });
   });
+  
 });
 
 /* aqui probamos stats y validatestats */

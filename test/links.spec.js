@@ -7,7 +7,7 @@ const {
   } = require('../library/paths');
 
   const { 
-    readFileAndSearchLinks, filterLinksMarked,
+    readFileAndSearchLinks, filterLinks,
     } = require('../library/links');
 
 /* test de absolute y relative*/
@@ -99,8 +99,10 @@ describe('readFileAndSearchLinks recibe un array de archivos md, los lee y retor
       text: 'tu castigo',
       file: `${process.cwd()}/test/prueba/nuevo.md`.replace(/\\/g, "/")
     }]
+
    return readFileAndSearchLinks(routeMdFile).then((response) => {
-    expect(response).toEqual(resultArrOfLinks)})
+    expect(response).toEqual(resultArrOfLinks)
+})
   });
   it('readFileAndSearchLinks deberia retornar promesa rechazada con un file no válido', () => {
     const wrongRouteMdFile= [`muevo.md`,]
@@ -108,6 +110,3 @@ describe('readFileAndSearchLinks recibe un array de archivos md, los lee y retor
       expect(e).toBeInstanceOf(Error)})
   });
 });
-
-
-

@@ -34,7 +34,7 @@ describe("mdLinks", () => {
           text: 'tu castigo',
           file: `${process.cwd()}/test/prueba/nuevo.md`.replace(/\\/g, "/"),
           status: 200,
-          isOk: 'ok'
+          isOk: 'true'
         }
     ]
     await mdLinks(rutaAbsoluta, {validate:true}).then(response => expect(response).toStrictEqual(arrResponseValidate))

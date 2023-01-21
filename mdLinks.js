@@ -23,7 +23,7 @@ const mdLinks = (path, option) =>
       readFileAndSearchLinks(filterArray).then((response) =>{
       if(option.validate === true){
       validateLinks(response).then((arrOfLinks) =>{
-        resolve(arrOfLinks)
+          resolve(arrOfLinks)
       })
     }
     if(option.validate === false){
