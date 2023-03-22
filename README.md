@@ -41,6 +41,3 @@ A list of available commands will appear.
 * 7. If you have any doubts and need to review the commands, type: **--help**:  ***`md-Links --help`***
 
 
-
-
-
