@@ -5,44 +5,40 @@
 
 ## 1. INTRO
 
-[Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado
-ligero muy popular entre developers. Es usado en muchísimas plataformas que
-manejan texto plano (GitHub, foros, blogs, ...) y es muy común
-encontrar varios archivos en ese formato en cualquier tipo de repositorio
-(empezando por el tradicional `README.md`).
+[Markdown](https://es.wikipedia.org/wiki/Markdown) is a lightweight markup language that is very popular among developers. It is used in many platforms that handle plain text (such as GitHub, forums, blogs, etc.), and it is very common to find several files in this format in any type of repository (starting with the traditional README.md).
 
-Estos archivos `Markdown` normalmente contienen _links_ (vínculos/ligas) que
-muchas veces están rotos o ya no son válidos y eso perjudica mucho el valor de
-la información que se quiere compartir.
+These Markdown files usually contain links that are often broken or no longer valid, which greatly impairs the value of the information that is intended to be shared.
 
-Se nos planteo el reto de realizar una herramienta (mediante el uso de NODE.JS) que pudiera identificar y leer archivos .md para extraer los links que se encuentran e ellos, a su vez fuera capaz de validarlos y obtener algunas estadísticas como: link rotos, cantidad de links unicos, total de links en el archivo, etc. 
+We were challenged to create a tool (using NODE.JS) that could identify and read .md files to extract the links contained in them, while also being able to validate them and obtain some statistics such as: broken links, number of unique links, total number of links in the file, etc.
 
-**md-Links** no solo es capaz de leer archivos, también si lo deseas puedes pasarle la ruta a una carpeta y este se encargara de localizar los archivos .md que existan dentro y leerlos para extraer los links. 
+**MD-LINKS** not only can read files, but also if desired, you can pass it the path to a folder and it will locate any .md files that exist within it and read them to extract the links.
 
-A continuación se coloca el diagrama de flujo de como trabaja md-Links:
-
+**Below you can find the flowchart of how md-Links works:**
 ![diagrama-flujo-01](https://user-images.githubusercontent.com/114018277/214339176-4ddaced7-242d-407c-90ea-5115efb0e1fd.png)
 
 
-## 2. ¿CÓMO INSTALARLO?
+## 2. HOW TO INSTALL IT?
 
-En tu terminal coloca el comando ***`npm install karlaCRM/md-links-KarlaCRM`***
-Una vez instalado:
+In your terminal type:  ***`npm install karlaCRM/md-links-KarlaCRM`*** and press ENTER. 
 
-* 1. En tu terminal escribe : ***`md-Links`***
-Aparecerá la lista de comandos que puedes utilizar
+## 3. HOW TO USE IT?
 
-* 2. md-Links está diseñado para buscar links en archivos MARKDOWN tanto colocandole la ruta a un archivo especifíco como colocando la ruta a un directorio.
+Once it is installed:
 
-* 3. En tu terminal escribe : ***`md-Links rutaDelArchivo/archivo`***, por ejemplo si tuvieras un archivo llamado "readme.md en una carpera llamada "pruebas" el comando sería md-Links pruebas/readme.md , da enter y la lista de links aparecerá. :)
+* 1. In your terminal, type: ***`md-Links`***
+A list of available commands will appear.
 
-* 4. Si deseas válidar cada link, saber su status escribe el comando **--validate**: ***`md-Links rutaDelArchivo/archivo --validate`***
+* 2. md-Links is designed to search for links in MARKDOWN files **by specifying the path to a specific file or directory**.
+
+* 3. In your terminal, type: ***`md-Links pathOfTheFile/file.md`***, for example, if you had a file called "readme.md" in a folder called "tests", the command would be **md-Links tests/readme.md**. Press enter and the list of links will appear. :)
+
+* 4. If you want to validate each link and see its status, type the **--validate** command: ***`md-Links pathOfTheFile/file.md --validate`***
 * 
-* 5. Si deseas saber cuantos links hay en la ruta que colocaste y cuantos links únicos escribe el comando **--stats**: ***`md-Links rutaDelArchivo/archivo --stats`***
+* 5. If you want to know how many links there are in the specified path and how many are unique, type the **--stats** command: ***`md-Links pathOfTheFile/file.md --stats`***
 * 
-* 6. Si deseas validar los links para saber su **status**, y obtener el **total de links**, cuantos hay **únicos y cuantos rotos** escribe el comando **--stats**:  ***`md-Links rutaDelArchivo/archivo --validate --stats`***
+* 6. If you want to validate the links to see their status, and get the total number of links, how many are unique, and how many are broken, type the **--stats** command:  ***`md-Links pathOfTheFile/file.md --validate --stats`***
 * 
-* 7. Si tienes alguna duda y necesitas volver a revisar los comandos escribe: **--help**:  ***`md-Links --help`***
+* 7. If you have any doubts and need to review the commands, type: **--help**:  ***`md-Links --help`***
 
 
 
